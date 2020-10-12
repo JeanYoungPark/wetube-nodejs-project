@@ -1,0 +1,22 @@
+{
+  "name": "wetube-nodejs-project",
+  "version": "1.0.0",
+  "description": "clone youtube",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JeanYoungPark/wetube-nodejs-project.git"
+  },
+  "author": "Jean Young Park",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JeanYoungPark/wetube-nodejs-project/issues"
+  },
+  "homepage": "https://github.com/JeanYoungPark/wetube-nodejs-project#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
