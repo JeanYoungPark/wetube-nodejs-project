@@ -11,9 +11,9 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(morgan("tiny"));
 app.use(helmet());
 
+const handleHome = (req,res) => res.send(`Hello World`);
+
 app.get('/',handleHome);
 app.get('/profile',handleHome);
 
-
-app.listen(4000);
-
+export default app;
