@@ -5,6 +5,6 @@ export const search = (req,res) => {
 }
 export const video = (req,res) => res.render("video",{pageTitle:"Video"});
 export const upload = (req,res) => res.render("upload",{pageTitle:"Upload"});
-export const video_detail = (req,res) => res.render("video_detail",{pageTitle:"Video Detail"});
-export const edit_video = (req,res) => res.render("edit_video",{pageTitle:"Edit Video"});
-export const delete_video = (req,res) => res.render("delete_video",{pageTitle:"Delete Video"});
+export const videoDetail = (req,res) => res.render("videoDetail",{pageTitle:"Video Detail"});
+export const editVideo = (req,res) => res.render("editVideo",{pageTitle:"Edit Video"});
+export const deleteVideo = (req,res) => res.render("deleteVideo",{pageTitle:"Delete Video"});

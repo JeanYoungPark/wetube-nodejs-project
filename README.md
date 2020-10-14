@@ -4,8 +4,8 @@ clone youtube
 ## pages:
 
 - [ ] Home
-- [ ] join
-- [ ] login
+- [x] join
+- [x] login
 - [x] search
 - [ ] user detail
 - [ ] edit profile
