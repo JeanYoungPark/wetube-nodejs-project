@@ -1,7 +1,7 @@
 import multer from "multer";
 import routes from "./routes";
 
-const multerVideo = multer({dest:"videos/"});
+const multerVideo = multer({dest:"uploads/videos/"});
 
 //미들웨어를 사용해 전역변수 생성
 export const localsMiddleware = (req,res,next) => {
