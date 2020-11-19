@@ -5,12 +5,12 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
-    'plugin:prettier/recommended'
   ],
   parserOptions: {
     ecmaVersion: 12,
     sourceType: 'module',
   },
   rules: {
+    "linebreak-style":0
   },
 };
