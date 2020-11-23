@@ -6,10 +6,19 @@ const MODE = process.env.WEBPACK_ENV;
 const ENTRY_FILE = path.resolve(__dirname, 'assets', 'js', 'main.js');
 const OUTPUT_DIR = path.join(__dirname, 'static');
 const config = {
-  entry: ENTRY_FILE,
+  devtool: 'cheap-module-source-map',
+  entry: ['@babel/polyfill', ENTRY_FILE],
   mode: MODE,
   module: {
     rules: [
+      {
+        test: /\.(js)$/,
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+        ],
+      },
       {
         test: /\.(scss)$/,
         use: ExtractCSS.extract([
@@ -19,7 +28,7 @@ const config = {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugin() {
+                plugins() {
                   return [autoprefixer({ browsers: 'cover 99.5%' })];
                 },
               },
