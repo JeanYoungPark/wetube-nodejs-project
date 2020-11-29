@@ -10,6 +10,7 @@ const USERS = '/users';
 const USER_DETAIL = '/:id';
 const EDIT_PROFILE = '/edit-profile';
 const CHANGE_PASSWORD = '/change-password';
+const ME = '/me';
 
 // Videoo
 const VIDEO = '/videos';
@@ -30,11 +31,13 @@ const routes = {
   search: SEARCH,
   users: USERS,
   userDetail: (id) => {
+    console.log(1111, id);
     if (id) {
       return `/users/${id}`;
     }
     return USER_DETAIL;
   },
+  me: ME,
   editProfile: EDIT_PROFILE,
   changePassword: CHANGE_PASSWORD,
   videos: VIDEO,
