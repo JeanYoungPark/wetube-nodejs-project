@@ -3,7 +3,7 @@ import passport from 'passport';
 import routes from '../routes';
 import { home, search } from '../controller/videoController';
 import {
-  postJoin, getJoin, postLogin, getLogin, logout, githubLogin, postGithubLogin, getMe,
+  postJoin, getJoin, postLogin, getLogin, logout, githubLogin, postGithubLogin, getMe, facebookLogin, postFacebookLogin,
 } from '../controller/usersController';
 import { onlyPublic, onlyPrivate } from '../middlewares';
 
@@ -25,6 +25,14 @@ globalRouter.get(
   passport.authenticate('github', { failureRedirect: '/login' }),
   postGithubLogin,
 );
+
+globalRouter.get(routes.facebook, facebookLogin);
+globalRouter.get(
+  routes.facebookCallback,
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  postFacebookLogin,
+);
+
 globalRouter.get(routes.me, getMe);
 
 export default globalRouter;
