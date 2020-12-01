@@ -18,7 +18,14 @@ const app = express();
 
 const CokieStore = MongoStore(session);
 
-app.use(helmet());
+app.use((req, res, next) => {
+  res.setHeader('Content-Security-Policy', "script-src 'self' https://apis.google.com");
+  return next();
+});
+
+app.use(helmet({
+  contentSecurityPolicy: false,
+}));
 app.set('view engine', 'pug');
 app.use('/uploads', express.static('uploads'));
 app.use('/static', express.static('static'));
