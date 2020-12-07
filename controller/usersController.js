@@ -1,4 +1,5 @@
 import passport from 'passport';
+import { compileClientWithDependenciesTracked } from 'pug';
 import routes from '../routes';
 import User from '../models/User';
 
@@ -109,7 +110,28 @@ export const postEditProfile = async (req, res) => {
     });
     res.redirect(routes.me);
   } catch (error) {
-    res.render('editProgfile', { pageTitle: 'Edit Profile' });
+    res.redirect(routes.editProgfile);
   }
 };
-export const changePassword = (req, res) => res.render('changePassword', { pageTitle: 'Change Password' });
+export const getChangePassword = (req, res) => res.render('changePassword', { pageTitle: 'Change Password' });
+export const postChangePassword = async (req, res) => {
+  const {
+    body: {
+      oldPassword,
+      newPassword,
+      newPassword1,
+    },
+  } = req;
+  try {
+    if (newPassword !== newPassword1) {
+      res.status(400);
+      res.redirect(`/users/${routes.changePassword}`);
+      return;
+    }
+    await req.user.changePassword(oldPassword, newPassword);
+    res.redirect(routes.me);
+  } catch (error) {
+    res.status(400);
+    res.redirect(`/users/${routes.changePassword}`);
+  }
+};
