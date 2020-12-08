@@ -1,5 +1,4 @@
 import passport from 'passport';
-import { compileClientWithDependenciesTracked } from 'pug';
 import routes from '../routes';
 import User from '../models/User';
 
@@ -25,7 +24,6 @@ export const postJoin = async (req, res, next) => {
       await User.register(user, password);
       next();
     } catch (error) {
-      console.log(error);
       res.redirect(routes.home);
     }
   }
@@ -83,19 +81,31 @@ export const logout = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const getMe = (req, res) => {
-  res.render('userDetail', { pageTitle: 'User Detail', user: req.user });
-};
-
-export const userDetail = async (req, res) => {
-  const { params: { id } } = req;
+// export const getMe = (req, res) => {
+//   console.log(req.user);
+//   res.render('userDetail', { pageTitle: 'User Detail', user: req.user });
+// };
+export const getMe = async (req, res) => {
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(req.user.id).populate('videos');
     res.render('userDetail', { pageTitle: 'User Detail', user });
   } catch (error) {
     res.redirect(routes.home);
   }
 };
+
+export const userDetail = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const user = await User.findById(id).populate('videos');
+    res.render('userDetail', { pageTitle: 'User Detail', user });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
+
 export const getEditProfile = (req, res) => res.render('editProfile', { pageTitle: 'Edit Profile' });
 export const postEditProfile = async (req, res) => {
   const {

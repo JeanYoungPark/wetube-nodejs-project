@@ -3,7 +3,16 @@ import passport from 'passport';
 import routes from '../routes';
 import { home, search } from '../controller/videoController';
 import {
-  postJoin, getJoin, postLogin, getLogin, logout, githubLogin, postGithubLogin, getMe, facebookLogin, postFacebookLogin,
+  postJoin,
+  getJoin,
+  postLogin,
+  getLogin,
+  logout,
+  githubLogin,
+  postGithubLogin,
+  getMe,
+  facebookLogin,
+  postFacebookLogin,
 } from '../controller/usersController';
 import { onlyPublic, onlyPrivate } from '../middlewares';
 
