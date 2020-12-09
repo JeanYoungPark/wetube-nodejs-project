@@ -114,17 +114,31 @@ __webpack_require__.r(__webpack_exports__);
 var videoContaier = document.getElementById('jsVideoPlayer');
 var videoPlayer = document.querySelector('#jsVideoPlayer video');
 var playBtn = document.getElementById('jsPlayButton');
+var volumnBtn = document.getElementById('jsVolumnBtn');
 
 function handlePlayClick() {
   if (videoPlayer.paused) {
     videoPlayer.play();
+    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
   } else {
     videoPlayer.pause();
+    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+  }
+}
+
+function handleVolumnClick() {
+  if (videoPlayer.muted) {
+    videoPlayer.muted = false;
+    volumnBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+  } else {
+    videoPlayer.muted = true;
+    volumnBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
   }
 }
 
 function init() {
   playBtn.addEventListener('click', handlePlayClick);
+  volumnBtn.addEventListener('click', handleVolumnClick);
 }
 
 if (videoContaier) {
