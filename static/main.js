@@ -114,10 +114,11 @@ __webpack_require__.r(__webpack_exports__);
 var videoContaier = document.getElementById('jsVideoPlayer');
 var videoPlayer = document.querySelector('#jsVideoPlayer video');
 var playBtn = document.getElementById('jsPlayButton');
-var volumnBtn = document.getElementById('jsVolumnBtn');
+var volumnBtn = document.getElementById('jsVolumeBtn');
 var fullScrnBtn = document.getElementById('jsFullScreen');
 var currentTime = document.getElementById('currentTime');
 var totalTime = document.getElementById('totalTime');
+var volumeRange = document.getElementById('jsVolume');
 
 function handlePlayClick() {
   if (videoPlayer.paused) {
@@ -133,9 +134,11 @@ function handleVolumnClick() {
   if (videoPlayer.muted) {
     videoPlayer.muted = false;
     volumnBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+    volumeRange.value = videoPlayer.volume;
   } else {
     videoPlayer.muted = true;
     volumnBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+    volumeRange.value = 0;
   }
 }
 
@@ -176,7 +179,7 @@ var formatDate = function formatDate(seconds) {
 };
 
 function getCurrentTime() {
-  currentTime.innerHTML = formatDate(videoPlayer.currentTime);
+  currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));
 }
 
 function setTotalTime() {
@@ -185,11 +188,30 @@ function setTotalTime() {
   setInterval(getCurrentTime, 1000);
 }
 
+function handleEnded() {
+  videoPlayer.currentTime = 0;
+  playBtn.innerHTML = '<i class="fas fa-play"></i>';
+}
+
+function handleDrag(event) {
+  var value = event.target.value;
+  videoPlayer.volume = value;
+
+  if (value > 0) {
+    volumnBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+  } else {
+    volumnBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+  }
+}
+
 function init() {
+  videoPlayer.volume = 0.5;
   playBtn.addEventListener('click', handlePlayClick);
   volumnBtn.addEventListener('click', handleVolumnClick);
   fullScrnBtn.addEventListener('click', goFullScreen);
   videoPlayer.addEventListener('loadedmetadata', setTotalTime);
+  videoPlayer.addEventListener('ended', handleEnded);
+  volumeRange.addEventListener('input', handleDrag);
 }
 
 if (videoContaier) {
