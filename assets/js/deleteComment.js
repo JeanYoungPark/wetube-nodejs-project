@@ -15,17 +15,19 @@ const deleteComment = (commentId) => {
 };
 
 const handleDeleteComment = async (event) => {
-  const videoId = window.location.href.split('/videos/')[1];
-  const commentId = event.target.id;
-  const response = await axios({
-    url: `/api/${videoId}/delete`,
-    method: 'POST',
-    data: {
-      commentId,
-    },
-  });
-  if (response.status === 200) {
-    deleteComment(commentId);
+  if (confirm('삭제하시겠습니까?')) {
+    const videoId = window.location.href.split('/videos/')[1];
+    const commentId = event.target.id;
+    const response = await axios({
+      url: `/api/${videoId}/delete`,
+      method: 'POST',
+      data: {
+        commentId,
+      },
+    });
+    if (response.status === 200) {
+      deleteComment(commentId);
+    }
   }
 };
 

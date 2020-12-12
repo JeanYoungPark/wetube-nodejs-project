@@ -211,9 +211,14 @@ var handleDeleteComment = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            if (!confirm('삭제하시겠습니까?')) {
+              _context.next = 7;
+              break;
+            }
+
             videoId = window.location.href.split('/videos/')[1];
             commentId = event.target.id;
-            _context.next = 4;
+            _context.next = 5;
             return axios__WEBPACK_IMPORTED_MODULE_0___default()({
               url: "/api/".concat(videoId, "/delete"),
               method: 'POST',
@@ -222,14 +227,14 @@ var handleDeleteComment = /*#__PURE__*/function () {
               }
             });
 
-          case 4:
+          case 5:
             response = _context.sent;
 
             if (response.status === 200) {
               deleteComment(commentId);
             }
 
-          case 6:
+          case 7:
           case "end":
             return _context.stop();
         }
