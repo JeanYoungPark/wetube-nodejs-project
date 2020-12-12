@@ -174,6 +174,86 @@ if (addCommentForm) {
 
 /***/ }),
 
+/***/ "./assets/js/deleteComment.js":
+/*!************************************!*\
+  !*** ./assets/js/deleteComment.js ***!
+  \************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+var deleteCommentBtn = document.querySelectorAll('.jsDeleteComment');
+var commentNumber = document.getElementById('jsCommentNumber');
+
+function decreaseNumber() {
+  commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) - 1;
+}
+
+var deleteComment = function deleteComment(commentId) {
+  var deleteBtn = document.getElementById(commentId);
+  var li = deleteBtn.closest('li');
+  li.remove();
+  decreaseNumber();
+};
+
+var handleDeleteComment = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+    var videoId, commentId, response;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            videoId = window.location.href.split('/videos/')[1];
+            commentId = event.target.id;
+            _context.next = 4;
+            return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+              url: "/api/".concat(videoId, "/delete"),
+              method: 'POST',
+              data: {
+                commentId: commentId
+              }
+            });
+
+          case 4:
+            response = _context.sent;
+
+            if (response.status === 200) {
+              deleteComment(commentId);
+            }
+
+          case 6:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function handleDeleteComment(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+function init() {
+  deleteCommentBtn.forEach(function (comment) {
+    comment.addEventListener('click', handleDeleteComment);
+  });
+}
+
+if (deleteCommentBtn.length) {
+  init();
+}
+
+/***/ }),
+
 /***/ "./assets/js/main.js":
 /*!***************************!*\
   !*** ./assets/js/main.js ***!
@@ -190,6 +270,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _videoRecorder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./videoRecorder */ "./assets/js/videoRecorder.js");
 /* harmony import */ var _videoRecorder__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_videoRecorder__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _addComment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./addComment */ "./assets/js/addComment.js");
+/* harmony import */ var _deleteComment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./deleteComment */ "./assets/js/deleteComment.js");
+
 
 
 
